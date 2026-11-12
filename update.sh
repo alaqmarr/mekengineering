@@ -3,6 +3,7 @@
 # Mek Engineering Corporation - Production Update & Redeploy Script
 # Port: 3600 | PM2 Process Name: mekeng
 # ============================================================================
+{
 set -euo pipefail
 
 APP_NAME="mekeng"
@@ -15,6 +16,9 @@ echo " Updating ${APP_NAME} in ${APP_DIR} (Port: ${PORT})"
 echo "============================================================"
 
 cd "${APP_DIR}"
+
+# Ignore chmod permission diffs between Windows and Linux
+git config core.fileMode false || true
 
 # 1. Safe online SQLite backup before updating (if database exists)
 mkdir -p "${APP_DIR}/data" "${APP_DIR}/backups"
@@ -29,11 +33,11 @@ else
   echo "==> [1/5] Skipping pre-update DB snapshot (no existing database or sqlite3 CLI)."
 fi
 
-# 2. Pull latest code from Git
-echo "==> [2/5] Pulling latest changes from Git..."
-git pull
-
-# Ensure scripts stay executable after git pull
+# 2. Fetch & sync latest tracked code from Git (never touches gitignored .env, data/, backups/, uploads/)
+echo "==> [2/5] Fetching and syncing latest changes from Git..."
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+git fetch origin "${BRANCH}"
+git reset --hard "origin/${BRANCH}"
 chmod +x "${APP_DIR}/setup.sh" "${APP_DIR}/update.sh" 2>/dev/null || true
 
 # 3. Install dependencies with --legacy-peer-deps
@@ -73,3 +77,5 @@ echo ""
 echo "============================================================"
 echo " Update Complete! '${APP_NAME}' is live on http://${HOST}:${PORT}"
 echo "============================================================"
+exit 0
+}

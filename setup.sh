@@ -15,6 +15,8 @@ echo " Setting up ${APP_NAME} in ${APP_DIR} (Port: ${PORT})"
 echo "============================================================"
 
 cd "${APP_DIR}"
+git config core.fileMode false 2>/dev/null || true
+chmod +x "${APP_DIR}/setup.sh" "${APP_DIR}/update.sh" 2>/dev/null || true
 
 # 1. Optional Ubuntu/Debian system packages & swap check (when sudo + apt-get exist)
 if command -v apt-get >/dev/null 2>&1 && command -v sudo >/dev/null 2>&1; then
