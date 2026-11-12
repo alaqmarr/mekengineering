@@ -102,11 +102,11 @@ if [ ! -f "${APP_DIR}/.env" ]; then
 fi
 
 # 4. Install dependencies & build Next.js standalone production server
-echo "==> [4/6] Installing dependencies & building Next.js standalone bundle..."
+echo "==> [4/6] Installing dependencies (--legacy-peer-deps) & building Next.js standalone bundle..."
 if [ -f "${APP_DIR}/package-lock.json" ]; then
-  npm ci
+  npm ci --legacy-peer-deps
 else
-  npm install
+  npm install --legacy-peer-deps
 fi
 
 npm run build
