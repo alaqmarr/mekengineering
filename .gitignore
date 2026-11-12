@@ -1,6 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# ============================================================================
+# Dependencies
+# ============================================================================
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +10,67 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# ============================================================================
+# Next.js & Build Artifacts
+# ============================================================================
 /.next/
 /out/
+/build/
+/dist/
+/coverage/
+*.tsbuildinfo
+next-env.d.ts
 
-# production
-/build
-
-# misc
-.DS_Store
+# ============================================================================
+# Environment & Secrets (keep .env.example committed)
+# ============================================================================
+.env
+.env.*
+!.env.example
 *.pem
+*.key
+*.crt
 
-# debug
+# ============================================================================
+# SQLite / libSQL Databases, Uploads & Backups (never commit runtime data)
+# ============================================================================
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+/data/*.db*
+/data/uploads/
+/backups/
+
+# ============================================================================
+# PM2, Logs & Runtime Temporary Files
+# ============================================================================
+/logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+.pm2/
+pids
+*.pid
+*.seed
+*.pid.lock
+/tmp/
+/temp/
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
+# ============================================================================
+# OS, Editor & Cloud Tooling
+# ============================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
 .vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts

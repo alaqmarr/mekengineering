@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "standalone",
+  serverExternalPackages: ["@libsql/client"],
+  experimental: {
+    proxyClientMaxBodySize: "64mb",
+  },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "**" },
+      { protocol: "http", hostname: "**" },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {
