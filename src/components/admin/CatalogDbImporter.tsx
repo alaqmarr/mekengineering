@@ -128,10 +128,10 @@ export function CatalogDbImporter({
               <span>SQLite Catalog Sync</span>
             </div>
             <h2 className="font-heading text-2xl font-bold uppercase text-foreground">
-              Upload `.db` File to Copy Catalog
+              Upload .db File to Copy Catalog
             </h2>
             <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
-              Upload any Mek Engineering SQLite database (`.db`, `.sqlite`, `.sqlite3` — e.g.{" "}
+              Upload any Mek Engineering SQLite database (.db, .sqlite, .sqlite3, e.g.{" "}
               <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono text-foreground">
                 data/mekengineering.db
               </code>
@@ -146,7 +146,7 @@ export function CatalogDbImporter({
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-secondary/70 hover:bg-secondary px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-foreground transition-colors shrink-0"
           >
             <Database className="h-4 w-4 text-primary" />
-            Export Current Catalog `.db`
+            Export Current Catalog (.db)
           </a>
         </div>
 
@@ -220,7 +220,7 @@ export function CatalogDbImporter({
                 </span>
               </div>
               <p className="text-xs text-muted-foreground mt-1.5">
-                Copies all categories, subcategories, and products from the `.db` file, updating
+                Copies all categories, subcategories, and products from the .db file, updating
                 matching slugs while preserving any existing uploaded images when the source image
                 is blank.
               </p>
@@ -251,7 +251,7 @@ export function CatalogDbImporter({
               </div>
               <p className="text-xs text-muted-foreground mt-1.5">
                 Clears current categories, subcategories, and products first, then copies the exact
-                catalog from the uploaded `.db` file.
+                catalog from the uploaded .db file.
               </p>
             </button>
           </div>
@@ -260,7 +260,7 @@ export function CatalogDbImporter({
         {/* Dropzone */}
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-foreground mb-2.5">
-            2. Select SQLite Database File (`.db`)
+            2. Select SQLite Database File (.db)
           </label>
           <div
             {...getRootProps()}
@@ -291,10 +291,10 @@ export function CatalogDbImporter({
             ) : (
               <div className="space-y-1">
                 <p className="text-sm font-bold text-foreground">
-                  Drag & drop your `.db` file here, or click to browse
+                  Drag & drop your .db file here, or click to browse
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Supports SQLite 3 `.db`, `.sqlite`, and `.sqlite3` files up to 64 MB
+                  Supports SQLite 3 .db, .sqlite, and .sqlite3 files up to 64 MB
                 </p>
               </div>
             )}
@@ -305,7 +305,7 @@ export function CatalogDbImporter({
               <div className="flex items-center gap-2.5 text-xs text-foreground">
                 <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
                 <span>
-                  Foreign keys (`category_id`, `subcategory_id`, `brand_id`) are automatically
+                  Foreign keys (category_id, subcategory_id, brand_id) are automatically
                   remapped by slug during import.
                 </span>
               </div>
@@ -366,7 +366,7 @@ export function CatalogDbImporter({
             <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
             <span>
               <strong>Note:</strong> Replace mode deletes existing categories, subcategories, and
-              products before importing from the `.db` file. Admin users, inquiries, hero slides,
+              products before importing from the .db file. Admin users, inquiries, hero slides,
               and R2/SMTP credentials remain untouched.
             </span>
           </div>

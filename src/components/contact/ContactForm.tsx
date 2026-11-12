@@ -53,7 +53,7 @@ export function ContactForm({
       setSubmittedId(data.id);
       notify.success(
         "Inquiry Received!",
-        `Reference #${data.id} logged. Our sales engineers will contact you shortly.`
+        `Reference #${data.id} logged. Our sales team will contact you shortly.`
       );
       setForm({
         name: "",
@@ -81,7 +81,7 @@ export function ContactForm({
           <CheckCircle2 className="h-7 w-7" />
         </div>
         <h3 className="font-heading text-2xl font-bold uppercase text-slate-900">
-          Thank You — Inquiry #{submittedId} Submitted
+          Thank You - Inquiry #{submittedId} Submitted
         </h3>
         <p className="text-sm text-slate-600 max-w-md mx-auto">
           Our sales desk at Victoria Ranigunj, Secunderabad has received your message and will get back to you promptly.

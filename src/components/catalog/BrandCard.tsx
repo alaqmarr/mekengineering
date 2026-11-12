@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface BrandCardItem {
   id: number;
@@ -39,11 +39,9 @@ export function BrandCard({ brand }: { brand: BrandCardItem }) {
           <h3 className="text-xl font-heading font-bold uppercase text-foreground group-hover:text-primary transition-colors">
             {brand.name}
           </h3>
-          <div className="flex gap-0.5 text-amber-500">
-            {Array.from({ length: brand.rating || 5 }).map((_, i) => (
-              <Star key={i} className="h-3.5 w-3.5 fill-current" />
-            ))}
-          </div>
+          <span className="rounded bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+            Authorized
+          </span>
         </div>
 
         <p className="text-xs font-bold uppercase tracking-wider text-primary/90 mb-2">

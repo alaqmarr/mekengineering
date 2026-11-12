@@ -16,7 +16,7 @@ export default async function ContactPage() {
   const siteUrl = await getSiteBaseUrl(content);
 
   const phone = content["contact.phone"] || "+91 93910 79492";
-  const email = content["contact.email"] || "info@mekengineering.com";
+  const email = content["contact.email"] || "info@mekengg.com";
   const whatsappNumber = (content["social.whatsapp"] || "919391079492").replace(/\D/g, "");
   const mapEmbedUrl =
     content["contact.mapEmbedUrl"] ||
@@ -88,7 +88,7 @@ export default async function ContactPage() {
       {/* Main Content Grid */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column — Contact Details & Map */}
+          {/* Left Column - Contact Details & Map */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <EditableText
@@ -166,7 +166,7 @@ export default async function ContactPage() {
                         <Clock className="h-3.5 w-3.5 text-primary" />
                         <EditableText
                           contentKey="contact.phoneAvailability"
-                          fallback="Mon – Sat • 10:00 AM to 8:00 PM IST"
+                          fallback="Monday – Saturday (Business Hours)"
                           label="Phone Availability Subtext"
                           section="contact"
                         />
@@ -196,15 +196,15 @@ export default async function ContactPage() {
                       >
                         <EditableText
                           contentKey="contact.email"
-                          fallback="info@mekengineering.com"
+                          fallback="info@mekengg.com"
                           label="Official Email Address"
                           section="contact"
                         />
                       </a>
                       <EditableText
                         contentKey="contact.emailResponse"
-                        fallback="Response time: < 24 hrs"
-                        label="Email Response Time Subtext"
+                        fallback="For wholesale inquiries & quotations"
+                        label="Email Card Subtext"
                         section="contact"
                         as="p"
                         className="text-xs text-muted-foreground"
@@ -228,10 +228,10 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <p className="font-heading text-base font-bold uppercase tracking-wide">
-                        Instant WhatsApp Desk
+                        WhatsApp Sales Desk
                       </p>
                       <p className="text-xs text-emerald-100">
-                        Chat directly with our Secunderabad counter for live stock & pricing
+                        Chat directly with our Secunderabad sales desk for quotes & availability
                       </p>
                     </div>
                   </div>
@@ -265,7 +265,7 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* Right Column — Inquiry Form */}
+          {/* Right Column - Inquiry Form */}
           <div className="lg:col-span-7">
             <div className="rounded-2xl border border-border bg-white p-8 md:p-10 shadow-lg">
               <div className="mb-8 border-b border-border pb-6">
@@ -279,7 +279,7 @@ export default async function ContactPage() {
                 />
                 <EditableText
                   contentKey="contact.form.paragraph"
-                  fallback="Fill out the inquiry form below and our sales engineers will respond promptly via email or phone."
+                  fallback="Fill out the inquiry form below and our sales team will get back to you via email or phone."
                   label="Contact Form Description"
                   section="contact"
                   type="textarea"

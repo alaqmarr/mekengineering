@@ -95,10 +95,10 @@ export default async function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y sm:divide-y-0 lg:divide-x divide-white/20">
             {[1, 2, 3, 4].map((idx) => {
               const defaults: Record<number, { v: string; l: string }> = {
-                1: { v: "55+", l: "Years of Legacy" },
-                2: { v: "10k+", l: "Products Cataloged" },
-                3: { v: "5k+", l: "Happy Clients" },
-                4: { v: "20+", l: "Partner Brands" },
+                1: { v: "1968", l: "Year Established" },
+                2: { v: "B2B & Retail", l: "Industrial Supply" },
+                3: { v: "GST", l: "Tax Invoicing" },
+                4: { v: "Ranigunj", l: "Secunderabad Showroom" },
               };
               return (
                 <div key={idx} className="px-4 pt-4 sm:pt-0">
@@ -268,7 +268,7 @@ export default async function AboutPage() {
               </div>
               <EditableText
                 contentKey="about.why.card1Title"
-                fallback="Authenticity Guaranteed"
+                fallback="Genuine Brand Supply"
                 label="Card 1 Title"
                 section="about"
                 as="h3"
@@ -276,7 +276,7 @@ export default async function AboutPage() {
               />
               <EditableText
                 contentKey="about.why.card1Text"
-                fallback="We are official authorized dealers. 100% genuine products sourced directly from manufacturers."
+                fallback="Authorized industrial supplier offering genuine tools and equipment from recognized manufacturers."
                 label="Card 1 Text"
                 section="about"
                 type="textarea"
@@ -291,7 +291,7 @@ export default async function AboutPage() {
               </div>
               <EditableText
                 contentKey="about.why.card2Title"
-                fallback="Expert Consultation"
+                fallback="Practical Tool Guidance"
                 label="Card 2 Title"
                 section="about"
                 as="h3"
@@ -299,7 +299,7 @@ export default async function AboutPage() {
               />
               <EditableText
                 contentKey="about.why.card2Text"
-                fallback="Our experienced technical team helps you select the exact tools for your industrial workload."
+                fallback="Our experienced showroom team helps you match the right power tools, instruments, and accessories to your application."
                 label="Card 2 Text"
                 section="about"
                 type="textarea"
@@ -314,7 +314,7 @@ export default async function AboutPage() {
               </div>
               <EditableText
                 contentKey="about.why.card3Title"
-                fallback="Rapid Logistics"
+                fallback="Wholesale & B2B Sourcing"
                 label="Card 3 Title"
                 section="about"
                 as="h3"
@@ -322,7 +322,7 @@ export default async function AboutPage() {
               />
               <EditableText
                 contentKey="about.why.card3Text"
-                fallback="Ready stock in Ranigunj, Secunderabad ensuring fast dispatch so your jobsite never stalls."
+                fallback="Serving workshops, contractors, and industrial buyers from Victoria Ranigunj, Secunderabad with transparent quotations and GST billing."
                 label="Card 3 Text"
                 section="about"
                 type="textarea"

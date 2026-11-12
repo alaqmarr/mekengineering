@@ -42,7 +42,7 @@ export async function sendTestSmtpEmail(recipientEmail?: string): Promise<{
     await transporter.sendMail({
       from: `"${creds.smtpFromName}" <${creds.smtpFromEmail || creds.smtpUser}>`,
       to: target,
-      subject: `✅ SMTP Test Successful — Mek Engineering Corporation (mekengg.com)`,
+      subject: `✅ SMTP Test Successful - Mek Engineering Corporation (mekengg.com)`,
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0f1115; color: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #27272a;">
           <div style="background: #eb2d4a; padding: 20px 28px;">
@@ -105,7 +105,7 @@ export async function sendInquiryNotificationEmails(inquiry: {
       from: fromHeader,
       to: creds.adminNotificationEmail || creds.smtpUser,
       replyTo: inquiry.email,
-      subject: `[Inquiry #${inquiry.id}] ${inquiry.productName ? `Quote: ${inquiry.productName}` : inquiry.subject} — ${inquiry.name}`,
+      subject: `[Inquiry #${inquiry.id}] ${inquiry.productName ? `Quote: ${inquiry.productName}` : inquiry.subject} - ${inquiry.name}`,
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 640px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
           <div style="background: #111318; border-bottom: 4px solid ${primaryColor}; padding: 24px 30px;">
@@ -136,7 +136,7 @@ export async function sendInquiryNotificationEmails(inquiry: {
     await transporter.sendMail({
       from: fromHeader,
       to: inquiry.email,
-      subject: `We received your inquiry — Mek Engineering Corporation`,
+      subject: `We received your inquiry - Mek Engineering Corporation`,
       html: `
         <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
           <div style="background: #111318; border-bottom: 4px solid ${primaryColor}; padding: 24px 30px;">

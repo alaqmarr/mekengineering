@@ -423,7 +423,7 @@ function R2ConnectionSlotCard({
                 type="password"
                 placeholder={
                   slotData.hasApiToken
-                    ? "Token saved — paste new token to reconnect or switch bucket"
+                    ? "Token saved - paste new token to reconnect or switch bucket"
                     : "Paste Cloudflare R2 API Token..."
                 }
                 value={apiToken}
@@ -434,7 +434,7 @@ function R2ConnectionSlotCard({
 
             <div>
               <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">
-                Custom Public CDN URL (Optional — auto-detects custom domain / r2.dev)
+                Custom Public CDN URL (Optional - auto-detects custom domain / r2.dev)
               </label>
               <input
                 type="url"

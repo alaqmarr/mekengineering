@@ -58,7 +58,7 @@ export default async function BrandsPage() {
           <div className="bg-primary/5 border border-primary/15 p-8 rounded-xl text-center">
             <EditableText
               contentKey="brands.pillar1.title"
-              fallback="100% Authentic"
+              fallback="Genuine Products"
               label="Pillar 1 Title"
               section="brands"
               as="h2"
@@ -66,7 +66,7 @@ export default async function BrandsPage() {
             />
             <EditableText
               contentKey="brands.pillar1.text"
-              fallback="No grey market imports. Only genuine factory-sealed products direct from manufacturers."
+              fallback="Authentic factory-sealed power tools, hand tools, and measuring instruments from recognized industrial manufacturers."
               label="Pillar 1 Description"
               section="brands"
               type="textarea"
@@ -78,7 +78,7 @@ export default async function BrandsPage() {
           <div className="bg-primary/5 border border-primary/15 p-8 rounded-xl text-center">
             <EditableText
               contentKey="brands.pillar2.title"
-              fallback="Full Warranty"
+              fallback="Manufacturer Warranty"
               label="Pillar 2 Title"
               section="brands"
               as="h2"
@@ -86,7 +86,7 @@ export default async function BrandsPage() {
             />
             <EditableText
               contentKey="brands.pillar2.text"
-              fallback="Official manufacturer warranty and GST invoicing applicable on all wholesale & retail sales."
+              fallback="Official manufacturer warranty and proper GST tax invoicing on wholesale and retail purchases."
               label="Pillar 2 Description"
               section="brands"
               type="textarea"
@@ -98,7 +98,7 @@ export default async function BrandsPage() {
           <div className="bg-primary/5 border border-primary/15 p-8 rounded-xl text-center">
             <EditableText
               contentKey="brands.pillar3.title"
-              fallback="Service Support"
+              fallback="Wholesale Quotations"
               label="Pillar 3 Title"
               section="brands"
               as="h2"
@@ -106,7 +106,7 @@ export default async function BrandsPage() {
             />
             <EditableText
               contentKey="brands.pillar3.text"
-              fallback="Authorized service center assistance and genuine OEM spare parts availability."
+              fallback="Dedicated B2B pricing and sourcing assistance from our showroom in Victoria Ranigunj, Secunderabad."
               label="Pillar 3 Description"
               section="brands"
               type="textarea"

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "sileo/styles.css";
 
 :root {
   --background: #ffffff;
@@ -22,14 +21,11 @@
   --input: #e2e8f0;
   --ring: #eb2d4a;
 
-  /* Custom Sileo Physics Toast Palette matching MEK Engineering */
-  --sileo-width: 370px;
-  --sileo-state-success: #eb2d4a;
-  --sileo-state-info: #eb2d4a;
-  --sileo-state-action: #eb2d4a;
-  --sileo-state-warning: #f59e0b;
-  --sileo-state-error: #ef4444;
-  --sileo-state-loading: #eb2d4a;
+  /* Centered Toast Red-Accent Background Palette */
+  --toast-bg-red-base: linear-gradient(135deg, #2b0c14 0%, #1e080e 55%, #270b12 100%);
+  --toast-bg-red-error: linear-gradient(135deg, #4f0d1a 0%, #390913 55%, #2b070e 100%);
+  --toast-bg-red-warning: linear-gradient(135deg, #38150f 0%, #240d0a 55%, #2b0c13 100%);
+  --toast-bg-red-info: linear-gradient(135deg, #3a0f19 0%, #260a11 55%, #1e080e 100%);
 }
 
 @theme inline {
@@ -51,6 +47,30 @@
   --color-ring: var(--ring);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-oswald), Impact, sans-serif;
+}
+
+@keyframes mek-toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mek-toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.animate-mek-toast {
+  animation: mek-toast-enter 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 html {

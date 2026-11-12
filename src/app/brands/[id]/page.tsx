@@ -115,7 +115,7 @@ export default async function BrandDetailPage({
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/60 bg-primary/15 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-primary">
               <BadgeCheck className="h-4 w-4" />
-              Authorized Distributor Since {brand.authorizedSince || "1968"}
+              Authorized Industrial Supplier
             </span>
 
             {brand.websiteUrl && (
@@ -182,7 +182,7 @@ export default async function BrandDetailPage({
         {brand.products.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border bg-white py-16 text-center px-4">
             <p className="text-muted-foreground text-sm mb-4">
-              Looking for a specific {brand.name} tool or OEM spare part? We stock the full range at our Ranigunj showroom.
+              Looking for a specific {brand.name} tool or OEM spare part? Contact our Secunderabad sales desk for availability and wholesale quotations.
             </p>
             <Link
               href="/contact"

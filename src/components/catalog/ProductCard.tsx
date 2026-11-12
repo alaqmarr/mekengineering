@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Crosshair } from "lucide-react";
+import { ArrowUpRight, Crosshair } from "lucide-react";
 import type { EnrichedProduct } from "@/db/queries";
 
 export function ProductCard({ product }: { product: EnrichedProduct }) {
@@ -88,11 +88,10 @@ export function ProductCard({ product }: { product: EnrichedProduct }) {
         <div className="pt-4 border-t border-border flex items-center justify-between gap-2">
           <div className="flex flex-col">
             <span className="text-xs font-bold uppercase tracking-wider text-primary">
-              {product.priceText || "Request Quote"}
+              Request Quote to Get Final Price
             </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium mt-0.5">
-              <CheckCircle2 className="h-3 w-3" />
-              {product.inStock ? "Ready Stock" : "Made to Order"}
+            <span className="text-[11px] text-muted-foreground font-medium mt-0.5">
+              {product.modelNumber ? `Model: ${product.modelNumber}` : "Wholesale & B2B Inquiry"}
             </span>
           </div>
 

@@ -213,7 +213,7 @@ export function AdminDashboardClient({
     modelNumber: "",
     shortDescription: "",
     description: "",
-    priceText: "Request Wholesale Quote",
+    priceText: "",
     inStock: true,
     featured: false,
     badge: "",
@@ -399,7 +399,7 @@ export function AdminDashboardClient({
       modelNumber: "",
       shortDescription: "",
       description: "",
-      priceText: "Request Wholesale Quote",
+      priceText: "",
       inStock: true,
       featured: false,
       badge: "",
@@ -1369,7 +1369,7 @@ export function AdminDashboardClient({
                             </div>
                           </td>
                           <td className="py-3.5 px-3 text-xs text-slate-600">
-                            <div>{p.category?.name || "—"}</div>
+                            <div>{p.category?.name || "-"}</div>
                             {p.subcategory && (
                               <div className="text-[11px] text-muted-foreground">
                                 ↳ {p.subcategory.name}
@@ -1377,7 +1377,7 @@ export function AdminDashboardClient({
                             )}
                           </td>
                           <td className="py-3.5 px-3 text-xs font-semibold">
-                            {p.brand?.name || "—"}
+                            {p.brand?.name || "-"}
                           </td>
                           <td className="py-3.5 px-3">
                             <span
@@ -2470,7 +2470,7 @@ export function AdminDashboardClient({
                     }
                     className="w-full rounded-lg border border-border px-3.5 py-2.5 text-sm"
                   >
-                    <option value="">— Select Category —</option>
+                    <option value="">-- Select Category --</option>
                     {categoriesList.map((c) => (
                       <option key={c.id} value={c.id}>
                         {c.name}
@@ -2490,7 +2490,7 @@ export function AdminDashboardClient({
                     }
                     className="w-full rounded-lg border border-border px-3.5 py-2.5 text-sm"
                   >
-                    <option value="">— Select Subcategory —</option>
+                    <option value="">-- Select Subcategory --</option>
                     {subcategoriesList
                       .filter(
                         (s) =>
@@ -2516,7 +2516,7 @@ export function AdminDashboardClient({
                     }
                     className="w-full rounded-lg border border-border px-3.5 py-2.5 text-sm"
                   >
-                    <option value="">— Select Brand —</option>
+                    <option value="">-- Select Brand --</option>
                     {brandsList.map((b) => (
                       <option key={b.id} value={b.id}>
                         {b.name}
@@ -2527,10 +2527,11 @@ export function AdminDashboardClient({
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
-                    Pricing / Quote Label
+                    Amount / Reference Price (Optional)
                   </label>
                   <input
                     type="text"
+                    placeholder="Optional - leave blank (site shows Request Quote to Get Final Price)"
                     value={productForm.priceText}
                     onChange={(e) =>
                       setProductForm({ ...productForm, priceText: e.target.value })
@@ -2876,7 +2877,7 @@ export function AdminDashboardClient({
                   }
                   className="w-full rounded-lg border border-border px-3.5 py-2.5 text-sm"
                 >
-                  <option value="">— Select Parent Category —</option>
+                  <option value="">-- Select Parent Category --</option>
                   {categoriesList.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
@@ -3022,7 +3023,7 @@ export function AdminDashboardClient({
               </div>
 
               <ImageUploaderField
-                label="Brand Logo (Optional — Drag & Drop or Ctrl+V)"
+                label="Brand Logo (Optional - Drag & Drop or Ctrl+V)"
                 folder="brands"
                 value={brandForm.logoUrl}
                 onChange={(url) => setBrandForm({ ...brandForm, logoUrl: url })}

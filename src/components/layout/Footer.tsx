@@ -27,6 +27,27 @@ const QUICK_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+const PLACEHOLDER_SOCIAL_URLS = new Set([
+  "https://facebook.com",
+  "https://www.facebook.com",
+  "https://x.com",
+  "https://www.x.com",
+  "https://twitter.com",
+  "https://www.twitter.com",
+  "https://instagram.com",
+  "https://www.instagram.com",
+  "https://linkedin.com",
+  "https://www.linkedin.com",
+]);
+
+function validSocialUrl(raw: string): string {
+  const trimmed = raw.trim().replace(/\/+$/, "");
+  if (!trimmed || PLACEHOLDER_SOCIAL_URLS.has(trimmed.toLowerCase())) {
+    return "";
+  }
+  return raw.trim();
+}
+
 export function Footer({ topCategories }: { topCategories: FooterCategory[] }) {
   const pathname = usePathname();
   const { getText } = useCms();
@@ -35,10 +56,10 @@ export function Footer({ topCategories }: { topCategories: FooterCategory[] }) {
     return null;
   }
 
-  const fb = getText("social.facebook", "");
-  const tw = getText("social.twitter", "");
-  const ig = getText("social.instagram", "");
-  const li = getText("social.linkedin", "");
+  const fb = validSocialUrl(getText("social.facebook", ""));
+  const tw = validSocialUrl(getText("social.twitter", ""));
+  const ig = validSocialUrl(getText("social.instagram", ""));
+  const li = validSocialUrl(getText("social.linkedin", ""));
   const phone = getText("contact.phone", "+91 93910 79492");
   const email = getText("contact.email", "info@mekengg.com");
 

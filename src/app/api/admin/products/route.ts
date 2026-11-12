@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         modelNumber: String(body.modelNumber || "").trim(),
         shortDescription: String(body.shortDescription || "").trim(),
         description: String(body.description || "").trim(),
-        priceText: String(body.priceText || "Request Wholesale Quote").trim(),
+        priceText: String(body.priceText ?? "").trim(),
         inStock: body.inStock !== false,
         featured: Boolean(body.featured),
         badge: String(body.badge || "").trim(),

@@ -14,7 +14,7 @@ const SQLITE_MAGIC = "SQLite format 3\0";
 
 function str(val: unknown, fallback = ""): string {
   if (val === null || val === undefined) return fallback;
-  return String(val);
+  return String(val).replace(/\u2014/g, "-");
 }
 
 function num(val: unknown, fallback = 0): number {
@@ -430,7 +430,7 @@ export async function POST(request: Request) {
           str(p.model_number),
           str(p.short_description),
           str(p.description),
-          str(p.price_text, "Request Wholesale Quote"),
+          str(p.price_text),
           boolInt(p.in_stock, 1),
           boolInt(p.featured, 0),
           str(p.badge),

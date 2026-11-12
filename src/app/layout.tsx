@@ -72,10 +72,6 @@ export default async function RootLayout({
         {
           "--primary": primaryColor,
           "--ring": primaryColor,
-          "--sileo-state-success": primaryColor,
-          "--sileo-state-info": primaryColor,
-          "--sileo-state-action": primaryColor,
-          "--sileo-state-loading": primaryColor,
         } as React.CSSProperties
       }
     >

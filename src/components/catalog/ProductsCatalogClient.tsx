@@ -32,7 +32,6 @@ export function ProductsCatalogClient({
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedSubcategory, setSelectedSubcategory] = useState(initialSubcategory);
   const [selectedBrand, setSelectedBrand] = useState(initialBrand);
-  const [inStockOnly, setInStockOnly] = useState(false);
   const [sortBy, setSortBy] = useState<"featured" | "name-asc" | "newest">("featured");
 
   const visibleSubcategories = useMemo(() => {
@@ -67,7 +66,6 @@ export function ProductsCatalogClient({
           p.brand?.name.toLowerCase() === selectedBrand.toLowerCase();
         if (!matchBrand) return false;
       }
-      if (inStockOnly && !p.inStock) return false;
       if (q) {
         const haystack = `${p.name} ${p.sku} ${p.modelNumber} ${p.shortDescription} ${p.brand?.name || ""} ${p.category?.name || ""} ${p.subcategory?.name || ""}`.toLowerCase();
         if (!haystack.includes(q)) return false;
@@ -91,7 +89,6 @@ export function ProductsCatalogClient({
     selectedCategory,
     selectedSubcategory,
     selectedBrand,
-    inStockOnly,
     sortBy,
   ]);
 
@@ -100,11 +97,10 @@ export function ProductsCatalogClient({
     setSelectedCategory("");
     setSelectedSubcategory("");
     setSelectedBrand("");
-    setInStockOnly(false);
   }
 
   const hasFilters = Boolean(
-    query || selectedCategory || selectedSubcategory || selectedBrand || inStockOnly
+    query || selectedCategory || selectedSubcategory || selectedBrand
   );
 
   return (
@@ -238,17 +234,6 @@ export function ProductsCatalogClient({
             })}
           </div>
         </div>
-
-        {/* Availability */}
-        <label className="flex items-center gap-2.5 pt-2 border-t border-border text-sm font-semibold text-foreground cursor-pointer">
-          <input
-            type="checkbox"
-            checked={inStockOnly}
-            onChange={(e) => setInStockOnly(e.target.checked)}
-            className="h-4 w-4 accent-primary"
-          />
-          Ready Stock Only
-        </label>
       </aside>
 
       {/* Product Grid */}
@@ -289,7 +274,7 @@ export function ProductsCatalogClient({
             />
             <EditableText
               contentKey="products.empty.paragraph"
-              fallback="Try clearing one or more filters or contact our sales desk — we stock thousands of additional SKUs offline."
+              fallback="Try clearing one or more filters or contact our sales desk with the model or part number you are looking for."
               label="Empty Catalog Paragraph"
               section="products"
               type="textarea"

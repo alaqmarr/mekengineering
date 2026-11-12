@@ -121,7 +121,7 @@ export function ProductDetailAdminBar({
           >
             <div className="flex items-center justify-between bg-[#111318] px-6 py-4 border-b-2 border-primary shrink-0">
               <h3 className="font-heading text-lg font-bold uppercase tracking-wider text-white">
-                Edit Product — {product.name}
+                Edit Product - {product.name}
               </h3>
               <button
                 type="button"
@@ -235,10 +235,11 @@ export function ProductDetailAdminBar({
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
-                    Price / Wholesale Label
+                    Amount / Reference Price (Optional)
                   </label>
                   <input
                     type="text"
+                    placeholder="Optional - leave blank"
                     value={form.priceText}
                     onChange={(e) => setForm({ ...form, priceText: e.target.value })}
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900"
@@ -254,7 +255,7 @@ export function ProductDetailAdminBar({
                     onChange={(e) => setForm({ ...form, inStock: e.target.checked })}
                     className="h-4 w-4 accent-primary"
                   />
-                  In Stock / Ready for Dispatch
+                  Available for Inquiry
                 </label>
                 <label className="inline-flex items-center gap-2 text-sm font-semibold text-slate-800 cursor-pointer">
                   <input
@@ -615,7 +616,7 @@ export function TaxonomyDetailAdminBar({
           >
             <div className="flex items-center justify-between bg-[#111318] px-6 py-4 border-b-2 border-primary">
               <h3 className="font-heading text-lg font-bold uppercase tracking-wider text-white">
-                Edit {entityLabel} — {item.name}
+                Edit {entityLabel} - {item.name}
               </h3>
               <button
                 type="button"
@@ -676,7 +677,7 @@ export function TaxonomyDetailAdminBar({
               {endpoint === "brands" ? (
                 <>
                   <ImageUploaderField
-                    label="Brand Logo Image (Optional — leave blank for bold industrial wordmark)"
+                    label="Brand Logo Image (Optional - leave blank for bold industrial wordmark)"
                     value={form.logoUrl}
                     onChange={(url) => setForm({ ...form, logoUrl: url })}
                     folder="brands"

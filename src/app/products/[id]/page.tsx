@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ChevronRight, ShieldCheck, CheckCircle2, Tag, Cpu } from "lucide-react";
+import { ChevronRight, ShieldCheck, Tag, Cpu } from "lucide-react";
 import {
   getAllBrandsWithCounts,
   getAllCategoriesWithCounts,
@@ -112,9 +112,6 @@ export default async function ProductDetailPage({
     offers: {
       "@type": "Offer",
       url: `${siteUrl}/products/${product.slug}`,
-      availability: product.inStock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/PreOrder",
       seller: {
         "@type": "Organization",
         name: content["site.name"] || "Mek Engineering Corporation",
@@ -208,17 +205,6 @@ export default async function ProductDetailPage({
                   placeholder="+ Add Badge"
                   className="inline-flex items-center gap-1 rounded bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary"
                 />
-
-                <span
-                  className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-                    product.inStock
-                      ? "bg-emerald-50 text-emerald-700"
-                      : "bg-amber-50 text-amber-700"
-                  }`}
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  {product.inStock ? "Ready Stock" : "Order Basis"}
-                </span>
               </div>
 
               {/* Product Title (Editable Inline) */}
@@ -262,20 +248,17 @@ export default async function ProductDetailPage({
                 </span>
               </div>
 
-              {/* Price / Wholesale Quote Callout */}
-              <div className="rounded-xl border border-border bg-secondary/40 px-5 py-4">
+              {/* Wholesale Quote Callout (MRP / Selling Price intentionally hidden; always directs to final quote) */}
+              <div className="rounded-xl border border-primary/20 bg-primary/5 px-5 py-4">
                 <span className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-0.5">
-                  Pricing & Wholesale Availability
+                  Wholesale & Dealer Pricing
                 </span>
-                <EditableEntityText
-                  endpoint="products"
-                  id={product.id}
-                  field="priceText"
-                  value={product.priceText}
-                  label="Price or Wholesale Label"
-                  as="div"
-                  className="text-2xl font-heading font-bold uppercase text-primary"
-                />
+                <div className="text-xl md:text-2xl font-heading font-bold uppercase text-primary">
+                  Request Quote to Get Final Price
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Special wholesale discounts, bulk order pricing & GST tax invoice available upon inquiry.
+                </p>
               </div>
 
               {/* Short Summary (Editable Inline) */}
@@ -329,16 +312,16 @@ export default async function ProductDetailPage({
                 <div>
                   <EditableText
                     contentKey="productDetail.assuranceTitle"
-                    fallback="100% Genuine Authorized Dealer Guarantee"
-                    label="Guarantee Title"
+                    fallback="Genuine Authorized Supply"
+                    label="Assurance Title"
                     section="products"
                     as="h3"
                     className="text-xs font-bold uppercase tracking-wider text-foreground mb-0.5"
                   />
                   <EditableText
                     contentKey="productDetail.assuranceText"
-                    fallback="Supplied with official manufacturer warranty, GST tax invoice, and authorized service support from Mek Engineering Corporation."
-                    label="Guarantee Description"
+                    fallback="Supplied with official manufacturer warranty and GST tax invoice from Mek Engineering Corporation."
+                    label="Assurance Description"
                     section="products"
                     type="textarea"
                     as="p"

@@ -159,7 +159,7 @@ export const products = sqliteTable(
     modelNumber: text("model_number").notNull().default(""),
     shortDescription: text("short_description").notNull().default(""),
     description: text("description").notNull().default(""),
-    priceText: text("price_text").notNull().default("Request Wholesale Quote"),
+    priceText: text("price_text").notNull().default(""),
     inStock: integer("in_stock", { mode: "boolean" }).notNull().default(true),
     featured: integer("featured", { mode: "boolean" }).notNull().default(true),
     badge: text("badge").notNull().default(""),

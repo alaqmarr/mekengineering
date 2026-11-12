@@ -206,7 +206,7 @@ export default async function HomePage() {
                 />
                 <EditableText
                   contentKey="home.subcategories.description"
-                  fallback="Pinpoint the exact industrial tool class you need — from SDS-Plus rotary hammers to precision digital metrology."
+                  fallback="Pinpoint the exact industrial tool class you need - from SDS-Plus rotary hammers to precision digital metrology."
                   label="Subcategories Description"
                   section="home"
                   type="textarea"
@@ -334,7 +334,7 @@ export default async function HomePage() {
 
             <EditableText
               contentKey="home.legacy.paragraph"
-              fallback="For over 55 years, we have defined excellence in industrial supply. As premier wholesale traders in Secunderabad, we bridge the gap between global manufacturers and local industry needs with 100% genuine equipment."
+              fallback="Since 1968, Mek Engineering Corporation has served workshops, contractors, and industrial buyers from Victoria Ranigunj, Secunderabad with genuine tools, machinery, and reliable wholesale supply."
               label="Legacy Section Paragraph"
               section="home"
               type="textarea"
@@ -372,7 +372,7 @@ export default async function HomePage() {
             <div className="bg-white/5 backdrop-blur-xs border border-white/10 p-8 text-center rounded-xl hover:bg-white/10 transition-colors">
               <EditableText
                 contentKey="home.legacy.stat1Value"
-                fallback="55+"
+                fallback="1968"
                 label="Stat 1 Value"
                 section="home"
                 as="div"
@@ -380,7 +380,7 @@ export default async function HomePage() {
               />
               <EditableText
                 contentKey="home.legacy.stat1Label"
-                fallback="Years Experience"
+                fallback="Established in Secunderabad"
                 label="Stat 1 Label"
                 section="home"
                 as="div"
@@ -391,7 +391,7 @@ export default async function HomePage() {
             <div className="bg-white/5 backdrop-blur-xs border border-white/10 p-8 text-center rounded-xl hover:bg-white/10 transition-colors">
               <EditableText
                 contentKey="home.legacy.stat2Value"
-                fallback="10k+"
+                fallback="GST"
                 label="Stat 2 Value"
                 section="home"
                 as="div"
@@ -399,7 +399,7 @@ export default async function HomePage() {
               />
               <EditableText
                 contentKey="home.legacy.stat2Label"
-                fallback="Products Sold"
+                fallback="Wholesale & B2B Billing"
                 label="Stat 2 Label"
                 section="home"
                 as="div"
@@ -410,7 +410,7 @@ export default async function HomePage() {
             <div className="bg-white/5 backdrop-blur-xs border border-white/10 p-8 text-center rounded-xl col-span-2 hover:bg-white/10 transition-colors">
               <EditableText
                 contentKey="home.legacy.stat3Value"
-                fallback="100%"
+                fallback="Genuine"
                 label="Stat 3 Value"
                 section="home"
                 as="div"
@@ -418,7 +418,7 @@ export default async function HomePage() {
               />
               <EditableText
                 contentKey="home.legacy.stat3Label"
-                fallback="Client Satisfaction & Genuine Supply"
+                fallback="Authorized Brand Supply"
                 label="Stat 3 Label"
                 section="home"
                 as="div"
@@ -451,7 +451,7 @@ export default async function HomePage() {
             />
             <EditableText
               contentKey="home.cta.paragraph"
-              fallback="Connect directly with our technical sales desk at Victoria Ranigunj, Secunderabad for GST wholesale invoicing, plant setup toolkits, and genuine OEM spares."
+              fallback="Connect directly with our sales desk at Victoria Ranigunj, Secunderabad for GST wholesale invoicing, industrial toolkits, and OEM spare inquiries."
               label="Bottom CTA Paragraph"
               section="home"
               type="textarea"
@@ -467,7 +467,7 @@ export default async function HomePage() {
             <Phone className="h-4 w-4 text-primary" />
             <EditableText
               contentKey="home.cta.button"
-              fallback="Speak With Our Engineers"
+              fallback="Contact Our Sales Desk"
               label="Bottom CTA Button"
               section="home"
             />

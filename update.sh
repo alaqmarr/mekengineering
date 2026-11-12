@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# Mek Engineering Corporation — Production Update & Redeploy Script
+# Mek Engineering Corporation - Production Update & Redeploy Script
 # Port: 3600 | PM2 Process Name: mekeng
 # ============================================================================
 set -euo pipefail

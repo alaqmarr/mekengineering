@@ -32,7 +32,7 @@ export async function generateMetadata({
   const siteUrl = await getSiteBaseUrl(content);
   const title =
     sub.metaTitle ||
-    `${sub.name}${sub.category ? ` — ${sub.category.name}` : ""}`;
+    `${sub.name}${sub.category ? ` | ${sub.category.name}` : ""}`;
   const description =
     sub.metaDescription || sub.shortDescription || sub.description.slice(0, 160);
   const ogImage = resolveAbsoluteUrl(

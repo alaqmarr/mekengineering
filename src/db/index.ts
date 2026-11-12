@@ -173,7 +173,7 @@ async function runInitialization(client: Client): Promise<void> {
       model_number TEXT NOT NULL DEFAULT '',
       short_description TEXT NOT NULL DEFAULT '',
       description TEXT NOT NULL DEFAULT '',
-      price_text TEXT NOT NULL DEFAULT 'Request Wholesale Quote',
+      price_text TEXT NOT NULL DEFAULT '',
       in_stock INTEGER NOT NULL DEFAULT 1,
       featured INTEGER NOT NULL DEFAULT 1,
       badge TEXT NOT NULL DEFAULT '',
@@ -222,6 +222,124 @@ async function runInitialization(client: Client): Promise<void> {
   await seedDefaultsIfEmpty(client);
 }
 
+const LEGACY_DUMMY_CONTENT_REPLACEMENTS: Array<{
+  key: string;
+  oldValues: string[];
+}> = [
+  { key: "social.facebook", oldValues: ["https://facebook.com"] },
+  { key: "social.twitter", oldValues: ["https://x.com", "https://twitter.com"] },
+  { key: "social.instagram", oldValues: ["https://instagram.com"] },
+  { key: "social.linkedin", oldValues: ["https://linkedin.com"] },
+  { key: "contact.phoneAvailability", oldValues: ["Mon – Sat • 10:00 AM to 8:00 PM IST"] },
+  { key: "contact.email", oldValues: ["info@mekengineering.com"] },
+  { key: "contact.emailResponse", oldValues: ["Response time: < 24 hrs"] },
+  {
+    key: "home.categories.description",
+    oldValues: [
+      "Explore Bosch Professional laser rangefinders, thermal detectors, line & rotary lasers, optical levels, digital inclinometers, and genuine accessories.",
+    ],
+  },
+  {
+    key: "home.subcategories.description",
+    oldValues: [
+      "Pinpoint the exact Bosch Professional measuring instrument class for your jobsite \u2014 from green-beam rangefinders to radar wallscanners.",
+    ],
+  },
+  {
+    key: "home.featured.description",
+    oldValues: [
+      "Hand-picked flagship Bosch Professional measuring instruments trusted by civil engineers, MEP contractors, and industrial plants across India.",
+    ],
+  },
+  {
+    key: "home.legacy.paragraph",
+    oldValues: [
+      "For over 55 years, we have defined excellence in industrial supply. As premier wholesale traders in Secunderabad, we bridge the gap between global manufacturers and local industry needs with 100% genuine equipment.",
+    ],
+  },
+  { key: "home.legacy.stat1Value", oldValues: ["55+"] },
+  { key: "home.legacy.stat1Label", oldValues: ["Years Experience"] },
+  { key: "home.legacy.stat2Value", oldValues: ["10k+"] },
+  { key: "home.legacy.stat2Label", oldValues: ["Products Sold"] },
+  { key: "home.legacy.stat3Value", oldValues: ["100%"] },
+  { key: "home.legacy.stat3Label", oldValues: ["Client Satisfaction & Genuine Supply"] },
+  {
+    key: "home.cta.paragraph",
+    oldValues: [
+      "Connect directly with our technical sales desk at Victoria Ranigunj, Secunderabad for GST wholesale invoicing, plant setup toolkits, and genuine OEM spares.",
+    ],
+  },
+  { key: "home.cta.button", oldValues: ["Speak With Our Engineers"] },
+  {
+    key: "products.hero.paragraph",
+    oldValues: [
+      "Explore our complete range of Bosch Professional laser rangefinders, thermal imaging cameras, wall detectors, line & rotary lasers, optical levels, inclinometers, and accessories.",
+    ],
+  },
+  {
+    key: "products.empty.paragraph",
+    oldValues: [
+      "Try clearing one or more filters or contact our sales desk \u2014 we stock thousands of additional SKUs offline.",
+    ],
+  },
+  { key: "productDetail.assuranceTitle", oldValues: ["100% Genuine Authorized Dealer Guarantee"] },
+  {
+    key: "productDetail.assuranceText",
+    oldValues: [
+      "Supplied with official manufacturer warranty, GST tax invoice, and authorized service support from Mek Engineering Corporation.",
+    ],
+  },
+  {
+    key: "categories.hero.paragraph",
+    oldValues: [
+      "Explore our comprehensive range of Bosch Professional measuring instruments and accessories organized by category.",
+    ],
+  },
+  {
+    key: "subcategories.hero.paragraph",
+    oldValues: [
+      "Drill down into specialized Bosch Professional measuring tool classes across laser rangefinders, thermal cameras, radar detectors, line/rotary lasers, optical levels, and accessories.",
+    ],
+  },
+  { key: "brands.pillar1.title", oldValues: ["100% Authentic"] },
+  {
+    key: "brands.pillar1.text",
+    oldValues: [
+      "No grey market imports. Only genuine factory-sealed products direct from manufacturers.",
+    ],
+  },
+  { key: "brands.pillar2.title", oldValues: ["Full Warranty"] },
+  { key: "brands.pillar3.title", oldValues: ["Service Support"] },
+  { key: "about.stat1.value", oldValues: ["55+"] },
+  { key: "about.stat1.label", oldValues: ["Years of Legacy"] },
+  { key: "about.stat2.value", oldValues: ["10k+"] },
+  { key: "about.stat2.label", oldValues: ["Products Cataloged"] },
+  { key: "about.stat3.value", oldValues: ["5k+"] },
+  { key: "about.stat3.label", oldValues: ["Happy Clients"] },
+  { key: "about.stat4.value", oldValues: ["20+"] },
+  { key: "about.stat4.label", oldValues: ["Partner Brands"] },
+  { key: "about.why.card1Title", oldValues: ["Authenticity Guaranteed"] },
+  {
+    key: "about.why.card1Text",
+    oldValues: [
+      "We are official authorized dealers. 100% genuine products sourced directly from manufacturers.",
+    ],
+  },
+  { key: "about.why.card3Title", oldValues: ["Rapid Logistics"] },
+  {
+    key: "about.why.card3Text",
+    oldValues: [
+      "Ready stock in Ranigunj, Secunderabad ensuring fast dispatch so your jobsite never stalls.",
+    ],
+  },
+  {
+    key: "contact.form.paragraph",
+    oldValues: [
+      "Fill out the inquiry form below and our sales engineers will respond promptly via email or phone.",
+    ],
+  },
+];
+
 async function seedDefaultsIfEmpty(client: Client): Promise<void> {
   const now = new Date().toISOString();
 
@@ -234,6 +352,20 @@ async function seedDefaultsIfEmpty(client: Client): Promise<void> {
     })),
     "write"
   );
+
+  // 1b. Scrub untouched legacy dummy site_content values from earlier seed versions
+  const defaultMap = new Map(DEFAULT_SITE_CONTENT.map((i) => [i.key, i.value]));
+  const contentCleanups = LEGACY_DUMMY_CONTENT_REPLACEMENTS.flatMap(({ key, oldValues }) => {
+    const nextVal = defaultMap.get(key);
+    if (nextVal === undefined) return [];
+    return oldValues.map((oldVal) => ({
+      sql: `UPDATE site_content SET value = ?, updated_at = ? WHERE key = ? AND value = ?`,
+      args: [nextVal, now, key, oldVal],
+    }));
+  });
+  if (contentCleanups.length > 0) {
+    await client.batch(contentCleanups, "write");
+  }
 
   // 2. Insert missing page SEO entries without overwriting admin edits
   await client.batch(
@@ -253,6 +385,24 @@ async function seedDefaultsIfEmpty(client: Client): Promise<void> {
     })),
     "write"
   );
+
+  // 2b. Upgrade legacy measuring-only page_seo titles if untouched
+  for (const seo of DEFAULT_PAGE_SEO) {
+    await client.execute({
+      sql: `UPDATE page_seo
+            SET title = ?, description = ?, keywords = ?, og_title = ?, og_description = ?, updated_at = ?
+            WHERE route = ? AND (title LIKE '%Bosch Measuring%' OR title LIKE '%55+ Years%')`,
+      args: [
+        seo.title,
+        seo.description,
+        seo.keywords,
+        seo.ogTitle,
+        seo.ogDescription,
+        now,
+        seo.route,
+      ],
+    });
+  }
 
   // 3. Seed hero slides only if empty
   const slideCountRes = await client.execute("SELECT COUNT(*) as cnt FROM hero_slides");
@@ -313,7 +463,42 @@ async function seedDefaultsIfEmpty(client: Client): Promise<void> {
       })),
       "write"
     );
+  } else {
+    // Scrub fabricated dummy per-brand authorized_since years and measuring-only Bosch description
+    await client.execute({
+      sql: `UPDATE brands
+            SET authorized_since = '', updated_at = ?
+            WHERE authorized_since IN ('1985', '1998', '1975', '2012', '2015', '2005')`,
+      args: [now],
+    });
+    const boschDefault = DEFAULT_BRANDS.find((b) => b.slug === "bosch");
+    if (boschDefault) {
+      await client.execute({
+        sql: `UPDATE brands
+              SET tagline = ?, description = ?, updated_at = ?
+              WHERE slug = 'bosch' AND description LIKE 'Official authorized distributor for Bosch Professional (Blue) measuring devices%'`,
+        args: [boschDefault.tagline, boschDefault.description, now],
+      });
+    }
   }
+
+  // 5. Replace any em dashes (U+2014 / char(8212)) with normal hyphens across all DB text columns
+  const emDashColumnGroups: Array<{ table: string; cols: string[] }> = [
+    { table: "site_content", cols: ["value", "label"] },
+    { table: "page_seo", cols: ["title", "description", "og_title", "og_description"] },
+    { table: "hero_slides", cols: ["badge", "title_part1", "title_highlight", "title_part2", "subtitle"] },
+    { table: "categories", cols: ["name", "badge", "short_description", "description", "meta_title", "meta_description"] },
+    { table: "subcategories", cols: ["name", "short_description", "description", "meta_title", "meta_description"] },
+    { table: "brands", cols: ["name", "tagline", "description", "meta_title", "meta_description"] },
+    { table: "products", cols: ["name", "short_description", "description", "badge", "specs_json", "features_json", "meta_title", "meta_description"] },
+  ];
+
+  const emDashStatements = emDashColumnGroups.map(({ table, cols }) => {
+    const sets = cols.map((c) => `${c} = REPLACE(${c}, char(8212), '-')`).join(", ");
+    const where = cols.map((c) => `${c} LIKE '%' || char(8212) || '%'`).join(" OR ");
+    return { sql: `UPDATE ${table} SET ${sets} WHERE ${where}`, args: [] };
+  });
+  await client.batch(emDashStatements, "write");
 }
 
 export function ensureDbReady(): Promise<void> {

@@ -37,7 +37,6 @@ export function CategoryProductsBrowser({
     useState<string>(initialSubcategory);
   const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [query, setQuery] = useState<string>("");
-  const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<SortOption>("featured");
 
   // Derive brands represented in this category's products
@@ -95,8 +94,6 @@ export function CategoryProductsBrowser({
         if (p.brand?.slug !== selectedBrand) return false;
       }
 
-      if (inStockOnly && !p.inStock) return false;
-
       if (q) {
         const haystack = `${p.name} ${p.sku} ${p.modelNumber} ${p.shortDescription} ${p.brand?.name || ""} ${p.subcategory?.name || ""}`.toLowerCase();
         if (!haystack.includes(q)) return false;
@@ -139,20 +136,18 @@ export function CategoryProductsBrowser({
     products,
     selectedSubcategory,
     selectedBrand,
-    inStockOnly,
     query,
     sortBy,
     subcategoryOrderMap,
   ]);
 
   const hasFilters = Boolean(
-    selectedSubcategory || selectedBrand || inStockOnly || query.trim()
+    selectedSubcategory || selectedBrand || query.trim()
   );
 
   function resetFilters() {
     setSelectedSubcategory("");
     setSelectedBrand("");
-    setInStockOnly(false);
     setQuery("");
   }
 
@@ -345,17 +340,6 @@ export function CategoryProductsBrowser({
               </div>
             </div>
           )}
-
-          {/* Availability */}
-          <label className="flex items-center gap-2.5 pt-2 border-t border-border text-sm font-semibold text-foreground cursor-pointer">
-            <input
-              type="checkbox"
-              checked={inStockOnly}
-              onChange={(e) => setInStockOnly(e.target.checked)}
-              className="h-4 w-4 accent-primary"
-            />
-            Ready Stock Only
-          </label>
         </aside>
 
         {/* Product Grid + Sort Header */}
@@ -371,7 +355,7 @@ export function CategoryProductsBrowser({
                 className="font-heading font-bold uppercase tracking-wide text-foreground mr-1"
               />
               <span>
-                — Showing{" "}
+                | Showing{" "}
                 <strong className="text-foreground">
                   {filteredProducts.length}
                 </strong>{" "}
@@ -409,7 +393,7 @@ export function CategoryProductsBrowser({
                 href="/contact"
                 className="inline-block rounded-lg bg-primary px-6 py-3 text-xs font-bold uppercase tracking-wider text-white"
               >
-                Inquire for Stock Availability
+                Contact Sales Desk
               </Link>
             </div>
           ) : filteredProducts.length === 0 ? (
